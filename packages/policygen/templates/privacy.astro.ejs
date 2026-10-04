@@ -421,17 +421,17 @@ import Shell from "<%- config.output.astroShell.path %>";
       <% } %>
 
       <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.browser_extension.data_handling_heading') %></h3>
-      <p class="<%= css.paragraph %>">
-        <%= t('privacy_policy.browser_extension.data_handling') %>
+      <p class="<%= css.paragraph %>" is:raw>
+        <%= config.privacy.browserExtension.dataHandling || t('privacy_policy.browser_extension.data_handling') %>
       </p>
       <% if (config.privacy.browserExtension.dataSentTo) { %>
-        <p class="<%= css.paragraph %>">
-          <%= t('privacy_policy.browser_extension.data_handling_sent', { destination: config.privacy.browserExtension.dataSentTo }) %>
+        <p class="<%= css.paragraph %>" is:raw>
+          <%= config.privacy.browserExtension.dataHandlingSent || t('privacy_policy.browser_extension.data_handling_sent', { destination: config.privacy.browserExtension.dataSentTo }) %>
         </p>
       <% } %>
       <% if (config.privacy.browserExtension.runsLocally) { %>
-        <p class="<%= css.paragraph %>">
-          <%= t('privacy_policy.browser_extension.data_handling_local') %>
+        <p class="<%= css.paragraph %>" is:raw>
+          <%= config.privacy.browserExtension.dataHandlingLocal || t('privacy_policy.browser_extension.data_handling_local') %>
         </p>
       <% } %>
 
@@ -440,14 +440,14 @@ import Shell from "<%- config.output.astroShell.path %>";
         <%= t('privacy_policy.browser_extension.data_storage_local') %>
       </p>
       <% if (config.privacy.browserExtension.dataSentTo) { %>
-        <p class="<%= css.paragraph %>">
-          <%= t('privacy_policy.browser_extension.data_storage_server') %>
+        <p class="<%= css.paragraph %>" is:raw>
+          <%= config.privacy.browserExtension.dataStorageServer || t('privacy_policy.browser_extension.data_storage_server') %>
         </p>
       <% } %>
 
       <h3 class="<%= css.tertiary %>"><%= t('privacy_policy.browser_extension.data_sharing_heading') %></h3>
-      <p class="<%= css.paragraph %>">
-        <%= t('privacy_policy.browser_extension.data_sharing') %>
+      <p class="<%= css.paragraph %>" is:raw>
+        <%= config.privacy.browserExtension.dataSharing || t('privacy_policy.browser_extension.data_sharing') %>
       </p>
 
       <p class="<%= css.paragraph %>">

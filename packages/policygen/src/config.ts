@@ -89,6 +89,16 @@ export type BrowserExtensionConfig = {
   dataSentTo?: string;
   runsLocally: boolean;
   storeListingUrl?: string;
+  /** Plain-text replacement for the extension Data Handling paragraph. */
+  dataHandling?: string;
+  /** Plain-text replacement for the extension Data Sharing paragraph. */
+  dataSharing?: string;
+  /** Plain-text replacement for the paragraph describing data sent to the server. */
+  dataHandlingSent?: string;
+  /** Plain-text replacement for the local-processing paragraph. */
+  dataHandlingLocal?: string;
+  /** Plain-text replacement for the server-storage paragraph. */
+  dataStorageServer?: string;
 };
 
 /**

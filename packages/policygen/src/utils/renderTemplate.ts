@@ -193,5 +193,5 @@ async function renderTemplateToFile(
   // Ensure the output directory exists
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   // Write the rendered output to the specified file
-  fs.writeFileSync(outputPath, rendered, "utf-8");
+  fs.writeFileSync(outputPath, `${rendered.trimEnd()}\n`, "utf-8");
 }

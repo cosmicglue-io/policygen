@@ -137,6 +137,33 @@ For browser extension privacy policies.
 | `browserExtension.dataSentTo` | `string` | Where data is sent |
 | `browserExtension.runsLocally` | `boolean` | Processes data locally |
 | `browserExtension.storeListingUrl` | `string` | Store listing URL |
+| `browserExtension.dataHandling` | `string` | Optional plain-text replacement for the Data Handling paragraph |
+| `browserExtension.dataSharing` | `string` | Optional plain-text replacement for the Data Sharing paragraph |
+| `browserExtension.dataHandlingSent` | `string` | Optional replacement for the data-transmission paragraph |
+| `browserExtension.dataHandlingLocal` | `string` | Optional replacement for the local-processing paragraph |
+| `browserExtension.dataStorageServer` | `string` | Optional replacement for the server-storage paragraph |
+
+Omit the disclosure overrides to retain the default extension disclosures.
+Custom values replace those paragraphs in HTML and Astro output; they are escaped
+plain text, not HTML or executable templates. Empty values use the defaults.
+Other extension disclosures remain generated from the configuration, so review
+that the complete section accurately describes your practices.
+
+```json
+{
+  "privacy": {
+    "browserExtension": {
+      "name": "Acme Links",
+      "permissions": ["tabs"],
+      "hostPermissions": ["<all_urls>"],
+      "dataCollected": ["currentTabUrl"],
+      "runsLocally": true,
+      "dataHandling": "We use authenticated operational signals for onboarding and customer support.",
+      "dataSharing": "Operational records are available to authorized support personnel."
+    }
+  }
+}
+```
 
 ### AI Usage (v0.7+)
 
