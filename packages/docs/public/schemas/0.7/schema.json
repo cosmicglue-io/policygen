@@ -311,6 +311,31 @@
             "storeListingUrl": {
               "type": "string",
               "title": "storeListingUrl"
+            },
+            "dataHandling": {
+              "description": "Plain-text replacement for the extension Data Handling paragraph.",
+              "type": "string",
+              "title": "dataHandling"
+            },
+            "dataSharing": {
+              "description": "Plain-text replacement for the extension Data Sharing paragraph.",
+              "type": "string",
+              "title": "dataSharing"
+            },
+            "dataHandlingSent": {
+              "description": "Plain-text replacement for the paragraph describing data sent to the server.",
+              "type": "string",
+              "title": "dataHandlingSent"
+            },
+            "dataHandlingLocal": {
+              "description": "Plain-text replacement for the local-processing paragraph.",
+              "type": "string",
+              "title": "dataHandlingLocal"
+            },
+            "dataStorageServer": {
+              "description": "Plain-text replacement for the server-storage paragraph.",
+              "type": "string",
+              "title": "dataStorageServer"
             }
           },
           "additionalProperties": false,
