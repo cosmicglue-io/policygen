@@ -101,6 +101,23 @@ Covers a wide range of compliance requirements:
 
 For full configuration reference and advanced usage, visit [policygen.xyz](https://policygen.xyz).
 
+## Releases
+
+The CI workflow tests the package and docs, then publishes an unpublished
+`packages/policygen/package.json` version when changes land on `main`. Already
+published versions are skipped. Registry failures fail the job rather than
+being treated as an unpublished version. Bump the package version in the PR
+when shipping a release; merging without a version bump does not release it.
+
+Publishing uses npm trusted publishing with provenance, without an npm token.
+In the `policygen` package settings on npmjs.com, configure a GitHub Actions
+trusted publisher with organization `cosmicglue-io`, repository `policygen`,
+workflow filename `ci.yml`, and no environment. Allow direct `npm publish`.
+See [npm's trusted publishing guide](https://docs.npmjs.com/trusted-publishers/).
+
+To retry a failed release, run **CI** from the Actions tab using **Run workflow**
+on `main`. Manual runs on other branches run checks but cannot publish.
+
 ## Sponsors
 
 PolicyGen is published and maintained by [CosmicGlue](https://cosmicglue.io).

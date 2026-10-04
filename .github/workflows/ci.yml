@@ -1,6 +1,7 @@
 name: CI
 
 on:
+  workflow_dispatch:
   pull_request:
   push:
     branches:
@@ -22,3 +23,46 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:policygen
       - run: pnpm build:docs
+
+  publish:
+    needs: test
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    concurrency:
+      group: policygen-npm-publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+          cache: pnpm
+      - run: npm install --global npm@11.5.1
+
+      - name: Check whether this version is already published
+        id: version
+        working-directory: packages/policygen
+        run: |
+          npm view policygen versions --json > "$RUNNER_TEMP/policygen-versions.json"
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const { version } = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const published = JSON.parse(fs.readFileSync(`${process.env.RUNNER_TEMP}/policygen-versions.json`, 'utf8'));
+          const exists = [published].flat().includes(version);
+          fs.appendFileSync(process.env.GITHUB_OUTPUT, `changed=${!exists}\n`);
+          console.log(exists ? `policygen@${version} is already published.` : `Publishing policygen@${version}.`);
+          NODE
+
+      - if: steps.version.outputs.changed == 'true'
+        run: pnpm install --frozen-lockfile
+      - if: steps.version.outputs.changed == 'true'
+        run: pnpm build:policygen
+      - name: Publish to npm
+        if: steps.version.outputs.changed == 'true'
+        working-directory: packages/policygen
+        run: npm publish --provenance --access public
