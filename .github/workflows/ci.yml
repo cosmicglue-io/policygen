@@ -22,6 +22,12 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm test:policygen
+      - name: Verify the release schema is committed
+        run: |
+          SCHEMA_VERSION=$(node -p 'require("./packages/policygen/package.json").version.split(".").slice(0, 2).join(".")')
+          SCHEMA_PATH="packages/docs/public/schemas/$SCHEMA_VERSION/schema.json"
+          git ls-files --error-unmatch "$SCHEMA_PATH"
+          git diff --exit-code HEAD -- "$SCHEMA_PATH"
       - run: pnpm build:docs
 
   publish:
@@ -62,6 +68,15 @@ jobs:
         run: pnpm install --frozen-lockfile
       - if: steps.version.outputs.changed == 'true'
         run: pnpm build:policygen
+      - name: Verify the release schema is hosted
+        if: steps.version.outputs.changed == 'true'
+        run: |
+          SCHEMA_VERSION=$(node -p 'require("./packages/policygen/package.json").version.split(".").slice(0, 2).join(".")')
+          curl --fail --silent --show-error --location --retry 6 --retry-delay 10 --retry-all-errors \
+            --connect-timeout 10 --max-time 30 \
+            "https://policygen.xyz/schemas/$SCHEMA_VERSION/schema.json" \
+            --output "$RUNNER_TEMP/policygen-hosted-schema.json"
+          cmp packages/policygen/dist/config_schema.json "$RUNNER_TEMP/policygen-hosted-schema.json"
       - name: Publish to npm
         if: steps.version.outputs.changed == 'true'
         working-directory: packages/policygen

@@ -108,6 +108,11 @@ The CI workflow tests the package and docs, then publishes an unpublished
 published versions are skipped. Registry failures fail the job rather than
 being treated as an unpublished version. Bump the package version in the PR
 when shipping a release; merging without a version bump does not release it.
+Run `pnpm build:policygen` and commit the generated
+`packages/docs/public/schemas/<major>.<minor>/schema.json` with that release.
+CI rejects missing or outdated committed schemas. Before publishing, it verifies
+the hosted schema matches the package's schema. If docs deployment has not
+finished or fails, publication is blocked; retry CI after docs deploy successfully.
 
 Publishing uses npm trusted publishing with provenance, without an npm token.
 In the `policygen` package settings on npmjs.com, configure a GitHub Actions
