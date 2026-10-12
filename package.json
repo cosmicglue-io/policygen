@@ -23,5 +23,8 @@
 		"test:policygen": "pnpm --filter policygen test",
 		"lint": "biome check packages/",
 		"lint:fix": "biome check --write packages/"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.1"
 	}
 }

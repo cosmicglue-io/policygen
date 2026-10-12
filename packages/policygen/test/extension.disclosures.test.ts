@@ -5,8 +5,8 @@ import ejs from "ejs";
 import i18next from "i18next";
 import { beforeAll, describe, expect, test } from "vitest";
 import {
-  defaultConfig,
   type BrowserExtensionConfig,
+  defaultConfig,
   Platforms,
 } from "../src/config";
 import en from "../src/locales/en";
