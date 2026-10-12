@@ -234,7 +234,8 @@ describe("privacy.html.ejs template", () => {
           providers: ["openai"],
           usedFor: ["Summarizing support requests"],
           dataHandling: "Requests are retained for up to 30 days.",
-          automatedDecisions: "AI suggests routing; a person makes the decision.",
+          automatedDecisions:
+            "AI suggests routing; a person makes the decision.",
         },
       },
     };
