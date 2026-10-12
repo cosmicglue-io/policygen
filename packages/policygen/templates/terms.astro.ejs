@@ -33,10 +33,10 @@ import Shell from "<%- config.output.astroShell.path %>";
       <%- t('tos.terms_notice', { entity_name: config.entity.name, entity_website: config.entity.website, link_class: css.link }) %>
     </p>
     <p class="<%= css.paragraph %>">
-      <% t('tos.agreement') %>
+      <%= t('tos.agreement') %>
     </p>
     <p class="<%= css.paragraph %>">
-      <% t('tos.changes') %>
+      <%= t('tos.changes') %>
     </p>
     <% if (!config.terms.underEighteen && !config.terms.underThirteen) { %>
       <p class="<%= css.paragraph %>">
@@ -80,7 +80,7 @@ import Shell from "<%- config.output.astroShell.path %>";
       <% if (config.terms.liabilityLimitation) { %>
         <li><a href="#section-liability-limitation" class="<%= css.link %>"><%= t('tos.sections.liability_limitation') %></a></li>
       <% } %>
-      <li><a href="#section-indemnfication" class="<%= css.link %>"><%= t('tos.sections.indemnification') %></a></li>
+      <li><a href="#section-indemnification" class="<%= css.link %>"><%= t('tos.sections.indemnification') %></a></li>
       <% if (config.terms.dmcaTakedown) { %>
         <li><a href="#section-dmca" class="<%= css.link %>"><%= t('tos.sections.dmca') %></a></li>
       <% } %>
@@ -224,7 +224,11 @@ import Shell from "<%- config.output.astroShell.path %>";
     <% } %>
     <% if (config.terms.disputeResolution === 'arbitration') { %>
       <p class="<%= css.paragraph %>">
-        <%= t('tos.disputes.arbitration', { governing_law: config.terms.governingLaw }) %>
+        <% if (config.terms.arbitrationProvider) { %>
+          <%= t('tos.disputes.arbitration_administered', { arbitration_provider: config.terms.arbitrationProvider, governing_law: config.terms.governingLaw }) %>
+        <% } else { %>
+          <%= t('tos.disputes.arbitration', { governing_law: config.terms.governingLaw }) %>
+        <% } %>
       </p>
     <% } %>
     <% if (config.terms.disputeResolution === 'litigation') { %>

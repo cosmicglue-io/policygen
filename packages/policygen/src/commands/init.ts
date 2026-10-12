@@ -570,6 +570,15 @@ export const initCommand = new Command("init")
             default: defaultTermsConfig.disputeResolution,
           },
           {
+            type: "input",
+            name: "arbitrationProvider",
+            message:
+              "Which body administers arbitration (e.g. 'the American Arbitration Association (AAA)', 'JAMS')? Leave blank to name none.",
+            when: (answers) =>
+              answers.disputeResolution === DisputeResolution.arbitration,
+            filter: (input: string) => input.trim() || undefined,
+          },
+          {
             type: "confirm",
             name: "mediation",
             message: "Do you support mediation for disputes?",

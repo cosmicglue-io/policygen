@@ -1,6 +1,6 @@
 {
   "name": "policygen",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "Generate privacy and terms of service policies for your website or app",
   "keywords": [
     "privacy",

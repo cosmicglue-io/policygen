@@ -46,6 +46,7 @@
   let userContentLicense = $state(false);
   let governingLaw = $state("California");
   let disputeResolution = $state("litigation");
+  let arbitrationProvider = $state("");
   let mediation = $state(false);
   let prohibitedUses = $state([]);
   let liabilityLimitation = $state(false);
@@ -166,6 +167,8 @@
     if (userContentLicense) config.terms.userContentLicense = true;
     config.terms.governingLaw = governingLaw;
     config.terms.disputeResolution = disputeResolution;
+    if (disputeResolution === "arbitration" && arbitrationProvider.trim())
+      config.terms.arbitrationProvider = arbitrationProvider.trim();
     if (mediation) config.terms.mediation = true;
     if (prohibitedUses.length) config.terms.prohibitedUses = prohibitedUses;
     if (liabilityLimitation) config.terms.liabilityLimitation = true;
@@ -665,6 +668,24 @@
             <option value="arbitration">Arbitration</option>
           </select>
         </div>
+
+        {#if disputeResolution === "arbitration"}
+          <div>
+            <label for="arbitrationProvider" class="mb-1 block text-sm font-medium text-[var(--color-text)]"
+              >Arbitration Provider</label
+            >
+            <input
+              id="arbitrationProvider"
+              type="text"
+              bind:value={arbitrationProvider}
+              placeholder="the American Arbitration Association (AAA)"
+              class="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-sm text-[var(--color-text)] focus:border-[var(--color-purple)] focus:outline-none"
+            />
+            <p class="mt-1 text-xs text-[var(--color-text-muted)]">
+              Optional. Leave blank to name no arbitration body.
+            </p>
+          </div>
+        {/if}
 
         <fieldset>
           <legend class="mb-2 block text-sm font-medium text-[var(--color-text)]"

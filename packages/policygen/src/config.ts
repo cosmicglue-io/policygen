@@ -383,6 +383,12 @@ export type TermsConfig = {
   governingLaw: string;
   /** How disputes are resolved (arbitration or litigation) */
   disputeResolution: DisputeResolution;
+  /**
+   * The body that administers arbitration, e.g. "the American Arbitration
+   * Association (AAA)" or "JAMS". Only used with arbitration; when unset, the
+   * clause names no institution.
+   */
+  arbitrationProvider?: string;
   /** Whether mediation is required before formal disputes */
   mediation: boolean;
   /** List of prohibited uses of your service */
@@ -577,6 +583,7 @@ export const defaultTermsConfig: TermsConfig = {
   userAccounts: false,
   governingLaw: "California",
   disputeResolution: DisputeResolution.litigation,
+  arbitrationProvider: undefined,
   mediation: false,
   prohibitedUses: [],
   serviceSLA: false,

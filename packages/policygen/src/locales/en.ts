@@ -578,7 +578,9 @@ export default {
         mediation:
           "In the event of a dispute arising under or relating to this agreement, the parties agree to first attempt to resolve the dispute by engaging in good faith with the other in a process of mediation before commencing arbitration or litigation.",
         arbitration:
-          "Any dispute arising under or relating to this agreement may only be brought in arbitration, administered by a single arbitrator in accordance with the rules of the arbitration institute of {{governing_law}}.",
+          "Any dispute arising under or relating to this agreement may only be resolved by binding arbitration before a single arbitrator, seated in {{governing_law}}.",
+        arbitration_administered:
+          "Any dispute arising under or relating to this agreement may only be resolved by binding arbitration administered by {{arbitration_provider}} under its applicable rules, before a single arbitrator, seated in {{governing_law}}.",
         litigation:
           "Any dispute arising under or relating to this agreement may only be brought in the courts of the jurisdiction of {{governing_law}}.",
       },
