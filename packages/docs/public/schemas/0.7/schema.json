@@ -537,6 +537,11 @@
           "description": "How disputes are resolved (arbitration or litigation)",
           "title": "disputeResolution"
         },
+        "arbitrationProvider": {
+          "description": "The body that administers arbitration, e.g. \"the American Arbitration\nAssociation (AAA)\" or \"JAMS\". Only used with arbitration; when unset, the\nclause names no institution.",
+          "type": "string",
+          "title": "arbitrationProvider"
+        },
         "mediation": {
           "description": "Whether mediation is required before formal disputes",
           "type": "boolean",
