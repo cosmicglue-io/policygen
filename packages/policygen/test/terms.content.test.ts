@@ -109,9 +109,7 @@ describe.each(templates)("%s content", (templateName) => {
       taxLiability: true,
       taxJurisdiction: "United States",
     });
-    const anchors = [...rendered.matchAll(/href="#([^"]+)"/g)].map(
-      (m) => m[1],
-    );
+    const anchors = [...rendered.matchAll(/href="#([^"]+)"/g)].map((m) => m[1]);
 
     expect(anchors.length).toBeGreaterThan(5);
     for (const anchor of anchors) {
